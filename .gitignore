@@ -1,0 +1,34 @@
+# Lake build directory and cache
+/.lake/
+
+# Lean build outputs
+*.olean
+*.ilean
+*.c
+*.o
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor files
+.vscode/settings.json
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+
+# Lean Language Server
+.lean_trace
+
+# Build artifacts that might be generated
+build/
+dist/
