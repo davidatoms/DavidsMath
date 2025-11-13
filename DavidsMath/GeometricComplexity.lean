@@ -34,7 +34,7 @@ characterized by geometric growth patterns.
 
 Different scaling factors correspond to different complexity classes:
 - scale = 1: O(1) - constant
-- scale = √2: O(1.414^n) - investigated in this work  
+- scale = √2: O(1.414^n) - investigated in this work
 - scale = 2: O(2^n) - potentially NP-complete
 - scale = e: O(e^n) - potentially NP-hard
 
@@ -50,7 +50,7 @@ open Real
 
 /-! ### Basic Definitions -/
 
-/-- 
+/--
 Geometric complexity: state space size at iteration n.
 -/
 def GeometricComplexity (r₀ : ℝ) (scale : ℝ) (n : ℕ) : ℝ :=
@@ -78,19 +78,19 @@ def CharacteristicGrowth (scale : ℝ) : ℝ := log scale
 /-! ### Proposed Complexity Classes -/
 
 /-- Constant complexity: O(1) -/
-def ConstantComplexity (r₀ : ℝ) (n : ℕ) : ℝ := 
+def ConstantComplexity (r₀ : ℝ) (n : ℕ) : ℝ :=
   GeometricComplexity r₀ 1 n
 
 /-- Square root of 2 complexity: O(√2^n) - this work -/
-def SqrtTwoComplexity (r₀ : ℝ) (n : ℕ) : ℝ := 
+def SqrtTwoComplexity (r₀ : ℝ) (n : ℕ) : ℝ :=
   GeometricComplexity r₀ (sqrt 2) n
 
 /-- Exponential complexity: O(2^n) - potentially NP-complete -/
-def ExponentialComplexity (r₀ : ℝ) (n : ℕ) : ℝ := 
+def ExponentialComplexity (r₀ : ℝ) (n : ℕ) : ℝ :=
   GeometricComplexity r₀ 2 n
 
 /-- Natural exponential complexity: O(e^n) -/
-def NaturalComplexity (r₀ : ℝ) (n : ℕ) : ℝ := 
+def NaturalComplexity (r₀ : ℝ) (n : ℕ) : ℝ :=
   GeometricComplexity r₀ (exp 1) n
 
 /-! ### Basic Properties -/
@@ -106,7 +106,7 @@ theorem geometric_complexity_succ (r₀ : ℝ) (scale : ℝ) (n : ℕ) :
   rw [pow_succ]
   ring
 
-theorem geometric_complexity_positive (r₀ : ℝ) (scale : ℝ) (n : ℕ) 
+theorem geometric_complexity_positive (r₀ : ℝ) (scale : ℝ) (n : ℕ)
     (h₁ : r₀ > 0) (h₂ : scale > 0) :
   GeometricComplexity r₀ scale n > 0 := by
   unfold GeometricComplexity
@@ -125,7 +125,7 @@ theorem exponential_growth_rate :
   unfold CharacteristicGrowth
   rfl
 
-/-- 
+/--
 Growth rates are ordered by their scaling factors.
 Larger scale → faster growth.
 -/
@@ -201,10 +201,10 @@ Can we use characteristic growth rates to separate complexity classes?
 
 If P ≠ NP, might there be a "gap" in possible growth rates?
 -/
-axiom complexity_class_gap : 
-  ∀ (s : ℝ), s > 0 → 
-    (CharacteristicGrowth s < log (sqrt 2) ∨ 
-     CharacteristicGrowth s > log 2) → 
+axiom complexity_class_gap :
+  ∀ (s : ℝ), s > 0 →
+    (CharacteristicGrowth s < log (sqrt 2) ∨
+     CharacteristicGrowth s > log 2) →
     sorry  -- Needs precise definition of complexity class membership
 
 /--
@@ -227,7 +227,7 @@ that sits between polynomial and standard exponential.
 Question: Are there natural computational problems with this growth rate?
 -/
 def ObservedSqrtTwoProblems : List String :=
-  ["Geometric packing problems?", 
+  ["Geometric packing problems?",
    "Certain approximation algorithms?",
    "Divide-and-conquer with √2 branching?"]
 
@@ -236,7 +236,7 @@ def ObservedSqrtTwoProblems : List String :=
 /--
 TODO: Connect to actual complexity theory
 1. Define proper mapping from computational problems to geometric structures
-2. Prove that the mapping preserves complexity properties  
+2. Prove that the mapping preserves complexity properties
 3. Find concrete problems that exhibit √2 scaling
 4. Test if π/4 provides actual algorithmic improvements
 -/
@@ -259,4 +259,3 @@ All conjectures and axioms above need either:
 The value is in the exploration, even if these specific connections
 don't pan out.
 -/
-
