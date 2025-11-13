@@ -228,9 +228,9 @@ Systems can exhibit both types of quantization:
 - Spatial (geometric √2 scaling)
 - Energetic (quantum arithmetic spacing)
 -/
-axiom GeometricQuantumCorrespondence : 
+axiom GeometricQuantumCorrespondence :
   ∀ (_ : Type) (freq : ℝ), ∃ (spatial : ℕ → ℝ) (energetic : ℕ → ℝ),
-    (∀ n, spatial (n+1) / spatial n = sqrt 2) ∧ 
+    (∀ n, spatial (n+1) / spatial n = sqrt 2) ∧
     (∀ n, energetic (n+1) - energetic n = h * freq)
 
 /-! ### Nobel Prize Connection -/
