@@ -380,55 +380,58 @@ function plot_black_hole_scaling(; save_path="graphs/")
     S_vals = bekenstein_hawking_entropy.(mass_range) ./ k_B
     T_vals = hawking_temperature.(mass_range)
     
-    fig, axes = plt.subplots(2, 2, figsize=(12, 10))
-    
-    # Plot 1: Schwarzschild radius
-    ax = axes[1, 1]
-    ax.loglog(mass_range ./ M_sun, rs_vals)
-    ax.set_xlabel("Mass (Solar Masses)")
-    ax.set_ylabel("Schwarzschild Radius (km)")
-    ax.set_title("r_s ∝ M (Linear)")
-    ax.grid(true, alpha=0.3)
+    # Create 4 subplots
+    p1 = plot(mass_range ./ M_sun, rs_vals,
+              xscale=:log10, yscale=:log10,
+              line=(:blue, 2),
+              xlabel="Mass (Solar Masses)",
+              ylabel="Schwarzschild Radius (km)",
+              title="r_s ∝ M (Linear)",
+              legend=false,
+              grid=true)
     
     # Mark √2 scaling
     M1 = 1.0
     M2 = sqrt(2)
     idx1 = argmin(abs.(mass_range ./ M_sun .- M1))
     idx2 = argmin(abs.(mass_range ./ M_sun .- M2))
-    ax.plot([M1, M2], [rs_vals[idx1], rs_vals[idx2]], 'ro-', linewidth=2, label="×√2")
-    ax.legend()
+    plot!(p1, [M1, M2], [rs_vals[idx1], rs_vals[idx2]], 
+          line=(:red, 2), marker=(:circle, 6), label="×√2")
     
-    # Plot 2: Horizon area
-    ax = axes[1, 2]
-    ax.loglog(mass_range ./ M_sun, A_vals)
-    ax.set_xlabel("Mass (Solar Masses)")
-    ax.set_ylabel("Horizon Area (km²)")
-    ax.set_title("A ∝ M² (Quadratic)")
-    ax.grid(true, alpha=0.3)
+    p2 = plot(mass_range ./ M_sun, A_vals,
+              xscale=:log10, yscale=:log10,
+              line=(:green, 2),
+              xlabel="Mass (Solar Masses)",
+              ylabel="Horizon Area (km²)",
+              title="A ∝ M² (Quadratic)",
+              legend=false,
+              grid=true)
     
-    # Plot 3: Entropy
-    ax = axes[2, 1]
-    ax.loglog(mass_range ./ M_sun, S_vals)
-    ax.set_xlabel("Mass (Solar Masses)")
-    ax.set_ylabel("Entropy (k_B)")
-    ax.set_title("S ∝ M² (Quadratic)")
-    ax.grid(true, alpha=0.3)
+    p3 = plot(mass_range ./ M_sun, S_vals,
+              xscale=:log10, yscale=:log10,
+              line=(:purple, 2),
+              xlabel="Mass (Solar Masses)",
+              ylabel="Entropy (k_B)",
+              title="S ∝ M² (Quadratic)",
+              legend=false,
+              grid=true)
     
-    # Plot 4: Temperature
-    ax = axes[2, 2]
-    ax.loglog(mass_range ./ M_sun, T_vals)
-    ax.set_xlabel("Mass (Solar Masses)")
-    ax.set_ylabel("Hawking Temperature (K)")
-    ax.set_title("T ∝ 1/M (Inverse)")
-    ax.grid(true, alpha=0.3)
+    p4 = plot(mass_range ./ M_sun, T_vals,
+              xscale=:log10, yscale=:log10,
+              line=(:orange, 2),
+              xlabel="Mass (Solar Masses)",
+              ylabel="Hawking Temperature (K)",
+              title="T ∝ 1/M (Inverse)",
+              legend=false,
+              grid=true)
     
-    plt.tight_layout()
+    p = plot(p1, p2, p3, p4, layout=(2, 2), size=(1200, 1000))
+    
     filepath = joinpath(save_path, "black_hole_scaling.png")
-    savefig(filepath, dpi=150)
+    savefig(p, filepath)
     println("Saved: $filepath")
-    plt.close()
     
-    return fig
+    return p
 end
 
 # ============================================================================
