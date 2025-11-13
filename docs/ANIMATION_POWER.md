@@ -128,35 +128,35 @@ dr/dn = r₀(√2)ⁿ ln(√2)
 - Bridges abstract ↔ concrete
 - **Visual learning is powerful!**
 
-### 4. **Social Media & Outreach**
-- Twitter/X: GIFs get 10x more engagement
-- LinkedIn: Professional but accessible
-- YouTube: Embed in explainer videos
-- **Viral potential!**
+### 4. **Online Distribution**
+- Twitter/X: GIF format natively supported
+- LinkedIn: Professional quality appropriate
+- YouTube: Can embed in explainer videos
+- File sizes suitable for web sharing
 
 ## The Mathematics of Motion
 
-### What Your Animations Prove:
+### What the Animations Demonstrate:
 
 **GIF 1 (Scaling)**: 
 - Equation: `r(n+1) = √2 × r(n)`
 - Visual: Each circle is √2 larger than previous
-- **The equation IS the motion!**
+- Shows the iterative growth pattern
 
 **GIF 2 (Velocity)**:
 - Equation: `dr/dn = r₀(√2)ⁿ ln(√2)`
 - Visual: Arrows getting longer exponentially
-- **The derivative IS the arrow field!**
+- Represents the derivative as a vector field
 
 **GIF 3 (Duality)**:
 - Equation: `(√2)ⁿ × (1/√2)ⁿ = 1`
 - Visual: One grows, one shrinks, product constant
-- **The duality IS the synchronization!**
+- Illustrates the inverse relationship
 
 **GIF 4 (Comparison)**:
-- Equation: `e^x > x² > x for large x`
+- Equation: Exponential > polynomial growth asymptotically
 - Visual: Blue curve pulling away from others
-- **The dominance IS the divergence!**
+- Shows relative growth rates
 
 ## Philosophical Insight
 
