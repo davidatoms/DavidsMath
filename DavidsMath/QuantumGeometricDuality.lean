@@ -16,7 +16,7 @@ import Mathlib.Data.Real.Sqrt
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import Mathlib.Data.Complex.Basic
-import Mathlib.LinearAlgebra.Matrix.Basic
+import Mathlib.Data.Matrix.Basic
 
 /-!
 # Quantum-Geometric Duality
@@ -30,7 +30,7 @@ and quantum mechanics, as demonstrated by:
 ## Main Theorems
 
 * `quantum_energy_quantization` - Energy levels E_n = (n + 1/2)hf
-* `geometric_scaling` - Radius r_n = r₀(√2)^n  
+* `geometric_scaling` - Radius r_n = r₀(√2)^n
 * `geometric_quantum_duality` - √2 × (1/√2) = 1
 * `hadamard_normalization` - Hadamard gate coefficients = 1/√2
 -/
@@ -63,6 +63,7 @@ def EnergyGap (f : ℝ) : ℝ := h * f
 theorem quantum_energy_gap (n : ℕ) (f : ℝ) :
   QuantumEnergyLevel (n + 1) f - QuantumEnergyLevel n f = EnergyGap f := by
   unfold QuantumEnergyLevel EnergyGap
+  push_cast
   ring
 
 theorem quantum_energy_positive (n : ℕ) (f : ℝ) (hf : f > 0) :
@@ -89,7 +90,6 @@ theorem geometric_scaling_ratio (r₀ : ℝ) (n : ℕ) (h : r₀ > 0) :
   unfold GeometricRadius
   rw [pow_succ]
   field_simp
-  ring
 
 theorem geometric_radius_positive (r₀ : ℝ) (n : ℕ) (h : r₀ > 0) :
   GeometricRadius r₀ n > 0 := by
@@ -120,9 +120,9 @@ theorem hadamard_normalization :
 theorem hadamard_norm_squared (h : sqrt 2 ≠ 0) :
   HadamardNorm^2 = 1 / 2 := by
   unfold HadamardNorm
-  rw [div_pow, one_pow, sq_sqrt]
-  · norm_num
-  · norm_num
+  field_simp
+  rw [sq_sqrt]
+  norm_num
 
 /-! ### Geometric-Quantum Duality -/
 
@@ -133,11 +133,11 @@ are inverse operations.
 theorem geometric_quantum_duality :
   sqrt 2 * (1 / sqrt 2) = 1 := by
   field_simp
-  
+
 theorem duality_power (n : ℕ) :
   (sqrt 2)^n * (1 / sqrt 2)^n = 1 := by
-  rw [← mul_pow]
-  simp [geometric_quantum_duality]
+  rw [← mul_pow, geometric_quantum_duality]
+  simp
 
 /-! ### Quantum State Superposition -/
 
@@ -153,9 +153,10 @@ def SuperpositionCoeff : ℝ := 1 / sqrt 2
 theorem superposition_normalized (h : sqrt 2 ≠ 0) :
   SuperpositionCoeff^2 + SuperpositionCoeff^2 = 1 := by
   unfold SuperpositionCoeff
-  rw [div_pow, div_pow, one_pow, one_pow, sq_sqrt]
+  field_simp
+  rw [sq_sqrt]
   · norm_num
-  · norm_num
+  norm_num
 
 /-! ### Comparison of Scalings -/
 
@@ -165,8 +166,7 @@ Quantum energy levels grow arithmetically (linear spacing).
 theorem quantum_arithmetic_growth (f : ℝ) :
   ∀ n : ℕ, QuantumEnergyLevel (n + 1) f - QuantumEnergyLevel n f = h * f := by
   intro n
-  unfold QuantumEnergyLevel
-  ring
+  exact quantum_energy_gap n f
 
 /--
 Geometric radii grow exponentially (geometric spacing).
@@ -186,15 +186,19 @@ def IsDiscrete (f : ℕ → ℝ) : Prop :=
 
 theorem quantum_is_discrete (f : ℝ) (hf : f > 0) :
   IsDiscrete (fun n => QuantumEnergyLevel n f) := by
-  unfold IsDiscrete QuantumEnergyLevel
-  intros n m hnm
-  intro h_eq
+  unfold IsDiscrete
+  intros n m hnm h_eq
+  unfold QuantumEnergyLevel at h_eq
+  have hne : h * f ≠ 0 := mul_ne_zero (ne_of_gt h_pos) (ne_of_gt hf)
   have : (n : ℝ) + 1/2 = (m : ℝ) + 1/2 := by
-    have h1 := mul_right_cancel₀ (mul_ne_zero (ne_of_gt h_pos) (ne_of_gt hf)) h_eq
-    linarith
+    have eq1 : ((n : ℝ) + 1/2) * (h * f) = ((m : ℝ) + 1/2) * (h * f) := by
+      calc ((n : ℝ) + 1/2) * (h * f)
+          = (n + 1/2) * h * f := by ring
+        _ = (m + 1/2) * h * f := h_eq
+        _ = ((m : ℝ) + 1/2) * (h * f) := by ring
+    exact (mul_right_cancel₀ hne eq1)
   have : (n : ℝ) = (m : ℝ) := by linarith
-  have : n = m := Nat.cast_injective this
-  contradiction
+  exact hnm (Nat.cast_injective this)
 
 theorem geometric_is_discrete (r₀ : ℝ) (h : r₀ > 0) :
   IsDiscrete (fun n => GeometricRadius r₀ n) := by
@@ -225,12 +229,9 @@ Systems can exhibit both types of quantization:
 - Energetic (quantum arithmetic spacing)
 -/
 axiom GeometricQuantumCorrespondence : 
-  ∀ (system : Type), ∃ (spatial : ℕ → ℝ) (energetic : ℕ → ℝ),
+  ∀ (_ : Type) (freq : ℝ), ∃ (spatial : ℕ → ℝ) (energetic : ℕ → ℝ),
     (∀ n, spatial (n+1) / spatial n = sqrt 2) ∧ 
-    (∀ n, energetic (n+1) - energetic n = h * (some_frequency system))
-
--- Placeholder for system-specific frequency
-axiom some_frequency : Type → ℝ
+    (∀ n, energetic (n+1) - energetic n = h * freq)
 
 /-! ### Nobel Prize Connection -/
 
@@ -255,11 +256,10 @@ Hadamard gate is unitary (preserves probability).
 theorem hadamard_unitary :
   HadamardNorm^2 + HadamardNorm^2 = 1 := by
   unfold HadamardNorm
-  rw [div_pow, div_pow, one_pow, one_pow]
-  rw [sq_sqrt, sq_sqrt]
+  field_simp
+  rw [sq_sqrt]
   · norm_num
-  · norm_num
-  · norm_num
+  norm_num
 
 /-! ### Future Directions -/
 
@@ -286,7 +286,7 @@ end
 This formalization establishes:
 
 1. **Quantum quantization** (Nobel Prize 2025): E_n = (n + 1/2)hf ✓
-2. **Geometric scaling** (Crystal work): r_n = r₀(√2)^n ✓  
+2. **Geometric scaling** (Crystal work): r_n = r₀(√2)^n ✓
 3. **Hadamard normalization** (Quantum computing): 1/√2 factor ✓
 4. **Duality theorem**: √2 × (1/√2) = 1 ✓
 
@@ -303,4 +303,3 @@ are inverse operations, forming a fundamental duality.
 - Is there a deeper geometric-quantum correspondence principle?
 - Can this inform quantum algorithm design?
 -/
-
