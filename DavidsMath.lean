@@ -10,6 +10,7 @@ import DavidsMath.1ScalingAlgorithmInscribedCircleSquare
 import DavidsMath.ScalingAlgorithmDerivatives
 import DavidsMath.ScalingAlgorithmDerivatives_v2
 import DavidsMath.GeometricComplexity
+import DavidsMath.QuantumGeometricDuality
 
 require mathlib from git
   "https://github.com/leanprover-community/mathlib4.git"
