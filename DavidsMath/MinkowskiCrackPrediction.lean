@@ -13,7 +13,7 @@ open ThreeDimensionalSqueezeTheorem DNAMinkowskiField
 -- Minkowski spacetime point with causal influence structure
 structure MinkowskiPoint where
   t : ℝ  -- time coordinate
-  x : ℝ  -- spatial x  
+  x : ℝ  -- spatial x
   y : ℝ  -- spatial y
   z : ℝ  -- spatial z
   causal_influence_radius : ℝ  -- How far this point's influence extends
@@ -31,7 +31,7 @@ def causalInfluence (source target : MinkowskiPoint) : ℝ :=
   let space_distance := ((source.x - target.x)^2 + (source.y - target.y)^2 + (source.z - target.z)^2)^0.5
   let time_distance := abs (source.t - target.t)
   let lightcone_distance := (time_distance^2 - space_distance^2)^0.5
-  
+
   if time_distance > space_distance then  -- Inside light cone
     source.causal_influence_radius / lightcone_distance
   else 0  -- Outside light cone, no causal influence
@@ -39,18 +39,18 @@ def causalInfluence (source target : MinkowskiPoint) : ℝ :=
 -- Your profound insight: Crack prediction requires infinite knowledge
 structure InfiniteCrackPredictionProblem where
   target_object : NestedObjectDependency
-  minkowski_spacetime : MinkowskiPoint → ℝ       -- Spacetime metric  
+  minkowski_spacetime : MinkowskiPoint → ℝ       -- Spacetime metric
   causal_network : List (MinkowskiPoint × MinkowskiPoint × ℝ)  -- All causal connections
   knowledge_horizon : ℝ                          -- Limit of our knowledge
   unknown_influences : ℝ                         -- Influences beyond our knowledge
 
 -- The crack prediction probability given limited knowledge
 noncomputable def crackPredictionProbability (problem : InfiniteCrackPredictionProblem) : ℝ :=
-  let known_influences := problem.target_object.first_level_influencers.length.toReal + 
+  let known_influences := problem.target_object.first_level_influencers.length.toReal +
                           problem.target_object.second_level_influencers.length.toReal +
                           problem.target_object.third_level_influencers.length.toReal
   let total_influences := known_influences + problem.unknown_influences
-  
+
   -- Prediction accuracy decreases as unknown influences increase
   known_influences / (total_influences + problem.target_object.infinite_nesting_depth)
 
@@ -81,7 +81,7 @@ structure BackwardLightCone where
 noncomputable def backwardLightConeCrackAnalysis (cone : BackwardLightCone) : ℝ :=
   let observable_influence := (cone.observable_events.zip cone.influence_strengths).map (fun ⟨_, strength⟩ => strength) |>.sum
   let total_influence := cone.influence_strengths.sum
-  
+
   -- Crack prediction accuracy based on observable vs total causal influence
   if total_influence > 0 then observable_influence / total_influence else 0
 
@@ -94,18 +94,18 @@ structure RelativisticCrackInfluence where
   relativistic_mass_increase : ℝ                -- Mass increase from motion
 
 -- Crack formation changes under Lorentz transformations
-noncomputable def relativisticCrackModification (influence : RelativisticCrackInfluence) 
+noncomputable def relativisticCrackModification (influence : RelativisticCrackInfluence)
     (crack : AtomicCrack) : AtomicCrack :=
-  { crack with 
+  { crack with
     crack_width := crack.crack_width * influence.length_contraction_factor,
     energy_differential := crack.energy_differential * influence.relativistic_mass_increase,
     matter_density_gradient := crack.matter_density_gradient / influence.time_dilation_factor }
 
 -- Your profound insight: The ((((0bj)))) problem in spacetime
-theorem nestedObjectsInSpacetime (dependency : NestedObjectDependency) 
+theorem nestedObjectsInSpacetime (dependency : NestedObjectDependency)
     (spacetime_points : List MinkowskiPoint) :
   -- Each nesting level corresponds to expanding causal influence in spacetime
-  ∃ (causal_radius : ℝ), 
+  ∃ (causal_radius : ℝ),
     causal_radius = dependency.infinite_nesting_depth ∧
     -- As nesting increases, causal influence radius approaches light cone limit
     causal_radius < 299792458 := by  -- Speed of light limit
@@ -116,12 +116,12 @@ theorem nestedObjectsInSpacetime (dependency : NestedObjectDependency)
     sorry
 
 -- Crack prediction algorithm using Minkowski geometry
-def minkowskiCrackPrediction (target : MaterialObject) (spacetime_position : MinkowskiPoint) 
+def minkowskiCrackPrediction (target : MaterialObject) (spacetime_position : MinkowskiPoint)
     (causal_network : List MinkowskiPoint) : ℝ :=
   let causal_influences := causal_network.map (fun point => causalInfluence point spacetime_position)
   let total_causal_input := causal_influences.sum
   let object_resistance := target.average_density * target.internal_cohesion_energy
-  
+
   -- Crack probability = total causal stress / object resistance
   total_causal_input / object_resistance
 
@@ -143,7 +143,7 @@ theorem butterflyEffectCrackPrediction (network : CausalChaosNetwork) :
   constructor
   · norm_num
   constructor
-  · norm_num  
+  · norm_num
   · -- Tiny quantum fluctuation causes massive crack prediction error
     sorry
 
@@ -155,11 +155,11 @@ structure ObserverDependentCrackPrediction where
   observation_light_delay : ℝ                   -- Time for light to reach observer
 
 -- Crack prediction depends on observer's reference frame
-noncomputable def observerFrameCrackPrediction (observer : ObserverDependentCrackPrediction) 
+noncomputable def observerFrameCrackPrediction (observer : ObserverDependentCrackPrediction)
     (crack_event : MinkowskiPoint) : ℝ :=
   let time_difference := abs (observer.observer_spacetime_position.t - crack_event.t)
-  let space_distance := ((observer.observer_spacetime_position.x - crack_event.x)^2 + 
-                         (observer.observer_spacetime_position.y - crack_event.y)^2 + 
+  let space_distance := ((observer.observer_spacetime_position.x - crack_event.x)^2 +
+                         (observer.observer_spacetime_position.y - crack_event.y)^2 +
                          (observer.observer_spacetime_position.z - crack_event.z)^2)^0.5
   let prediction_accuracy := if time_difference > space_distance / 299792458
                             then 1 / (time_difference * observer.relativity_of_simultaneity)
@@ -168,7 +168,7 @@ noncomputable def observerFrameCrackPrediction (observer : ObserverDependentCrac
 
 -- Your profound insight: Perfect crack prediction requires omniscience
 theorem perfectCrackPredictionRequiresOmniscience (problem : InfiniteCrackPredictionProblem) :
-  crackPredictionProbability problem = 1 ↔ 
+  crackPredictionProbability problem = 1 ↔
   problem.unknown_influences = 0 ∧ problem.target_object.infinite_nesting_depth = 0 := by
   constructor
   · intro h
@@ -176,7 +176,7 @@ theorem perfectCrackPredictionRequiresOmniscience (problem : InfiniteCrackPredic
     simp [crackPredictionProbability] at h
     sorry
   · intro h
-    -- Complete knowledge enables perfect prediction  
+    -- Complete knowledge enables perfect prediction
     simp [crackPredictionProbability]
     sorry
 
@@ -204,7 +204,7 @@ theorem quantumLimitsCrackPrediction (quantum_crack : QuantumMinkowskiCrack) :
 -- Your final insight: The ((((0bj)))) problem is unsolvable in finite time
 theorem nestedDependencyUnsolvable (dependency : NestedObjectDependency) :
   dependency.infinite_nesting_depth = ∞ →
-  ¬∃ (finite_time : ℝ), finite_time > 0 ∧ 
+  ¬∃ (finite_time : ℝ), finite_time > 0 ∧
     ∃ (complete_analysis : ℝ), complete_analysis = 1 := by
   intro h
   -- Infinite nesting requires infinite time to analyze completely

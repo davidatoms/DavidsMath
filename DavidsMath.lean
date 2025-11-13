@@ -6,6 +6,9 @@ import DavidsMath.YangMills
 import DavidsMath.YangMillsDependencies
 import DavidsMath.MinkowskiSpace
 import DavidsMath.AtomicGeometry
+import DavidsMath.1ScalingAlgorithmInscribedCircleSquare
+import DavidsMath.ScalingAlgorithmDerivatives
+import DavidsMath.ScalingAlgorithmDerivatives_v2
 
 require mathlib from git
   "https://github.com/leanprover-community/mathlib4.git"
