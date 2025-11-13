@@ -1,0 +1,521 @@
+\section{Mathematical Prerequisites for Yang-Mills Mass Gap Problem}
+
+The Yang-Mills Mass Gap Problem requires a deep understanding of multiple areas of mathematics and theoretical physics. This document provides a comprehensive overview of the mathematical prerequisites organized by subject area.
+
+\subsection{Differential Geometry}
+
+\subsubsection{Manifolds and Fiber Bundles}
+\begin{itemize}
+    \item Smooth manifolds and tangent bundles
+    \item Vector bundles and sections
+    \item Principal $G$-bundles for structure group $G$
+    \item Associated bundles and the associated bundle construction
+    \item Bundle maps and bundle morphisms
+    \item Trivial vs. non-trivial bundles
+    \item Local trivializations and transition functions
+    \item Frame bundles and their reduction
+\end{itemize}
+
+\textbf{Key Concepts:}
+\begin{itemize}
+    \item A principal $G$-bundle $P \to M$ consists of a total space $P$, base manifold $M$, and free right $G$-action
+    \item Local sections exist, but global sections may not (topological obstructions)
+    \item Yang-Mills theory is formulated on principal bundles with compact gauge group $G$
+\end{itemize}
+
+\subsubsection{Lie Groups and Lie Algebras}
+\begin{itemize}
+    \item Definition and structure of Lie groups
+    \item Compact simple Lie groups: $\mathrm{SU}(N)$, $\mathrm{SO}(N)$, $\mathrm{Sp}(N)$, exceptional groups
+    \item Lie algebras: $\mathfrak{su}(N)$, $\mathfrak{so}(N)$, $\mathfrak{sp}(N)$
+    \item Exponential map: $\exp: \mathfrak{g} \to G$
+    \item Adjoint representation: $\mathrm{Ad}: G \to \mathrm{Aut}(\mathfrak{g})$
+    \item Killing form and structure constants
+    \item Root systems and Cartan subalgebras
+    \item Representation theory of compact Lie groups
+    \item Invariant integration (Haar measure)
+\end{itemize}
+
+\textbf{Key Examples:}
+\begin{itemize}
+    \item $\mathrm{SU}(2)$: spin representations and Pauli matrices
+    \item $\mathrm{SU}(3)$: color gauge group for QCD, Gell-Mann matrices
+    \item $\mathrm{U}(1)$: electromagnetism (abelian case)
+\end{itemize}
+
+\subsubsection{Principal Bundles and Gauge Connections}
+\begin{itemize}
+    \item Connection 1-forms on principal bundles
+    \item Gauge potentials as Lie algebra-valued 1-forms: $A \in \Omega^1(M, \mathfrak{g})$
+    \item Horizontal and vertical distributions
+    \item Parallel transport and holonomy
+    \item Gauge transformations: $A \mapsto g^{-1}Ag + g^{-1}dg$ for $g: M \to G$
+    \item Covariant derivative on associated bundles
+    \item Christoffel symbols in local coordinates
+\end{itemize}
+
+\textbf{Physical Interpretation:}
+\begin{itemize}
+    \item Connection $A$ represents gauge potential (generalized electromagnetic potential)
+    \item Gauge transformations are changes of local trivialization
+    \item Physical observables must be gauge-invariant
+\end{itemize}
+
+\subsubsection{Curvature Tensors}
+\begin{itemize}
+    \item Curvature 2-form: $F = dA + \frac{1}{2}[A \wedge A]$ (non-abelian case)
+    \item Reduced form: $F = dA + A \wedge A$ (with appropriate conventions)
+    \item Bianchi identity: $d_A F = dF + [A \wedge F] = 0$
+    \item Curvature as obstruction to integrability
+    \item Sectional, Ricci, and scalar curvatures (for metric connections)
+    \item Yang-Mills field strength tensor $F_{\mu\nu}$
+\end{itemize}
+
+\textbf{Physical Meaning:}
+\begin{itemize}
+    \item $F$ is the field strength (generalization of electromagnetic field tensor)
+    \item In QCD: $F$ represents gluon field configurations
+    \item Self-dual and anti-self-dual solutions (instantons)
+\end{itemize}
+
+\subsubsection{Differential Forms and Exterior Calculus}
+\begin{itemize}
+    \item Exterior algebra $\bigwedge^* T^*M$
+    \item Differential forms: $\omega \in \Omega^k(M)$
+    \item Exterior derivative: $d: \Omega^k(M) \to \Omega^{k+1}(M)$
+    \item Wedge product: $\omega \wedge \eta$
+    \item Pullback of forms: $f^* \omega$
+    \item Integration of forms on oriented manifolds
+    \item Stokes' theorem: $\int_M d\omega = \int_{\partial M} \omega$
+    \item De Rham cohomology
+\end{itemize}
+
+\subsubsection{Hodge Duality Operator}
+\begin{itemize}
+    \item Hodge star operator: $*: \Omega^k(M) \to \Omega^{n-k}(M)$ on $n$-manifold
+    \item Dependence on metric and orientation
+    \item Property: $**\omega = (-1)^{k(n-k)} \omega$ on $k$-forms
+    \item Inner product on forms: $\langle \omega, \eta \rangle = \int_M \omega \wedge *\eta$
+    \item Codifferential: $\delta = (-1)^{n(k+1)+1} *d*$
+    \item Laplace-Beltrami operator: $\Delta = d\delta + \delta d$
+    \item Harmonic forms: $\Delta \omega = 0$
+\end{itemize}
+
+\textbf{Application to Yang-Mills:}
+\begin{itemize}
+    \item Yang-Mills Lagrangian: $\mathcal{L} = \frac{1}{4g^2} \int \operatorname{Tr}(F \wedge *F)$
+    \item Yang-Mills equations: $d_A *F = 0$ and $d_A F = 0$ (Bianchi identity)
+    \item Self-dual instantons: $F = *F$ (in Euclidean signature)
+\end{itemize}
+
+\subsection{Functional Analysis}
+
+\subsubsection{Hilbert Spaces and Operator Theory}
+\begin{itemize}
+    \item Complete inner product spaces
+    \item Orthonormal bases and Parseval's identity
+    \item Bounded and unbounded operators
+    \item Domain, range, and kernel of operators
+    \item Closed operators and closable operators
+    \item Graph norm and graph closure
+    \item Strong, weak, and uniform operator topologies
+    \item Compact operators and Fredholm operators
+    \item Trace class and Hilbert-Schmidt operators
+\end{itemize}
+
+\textbf{QFT Context:}
+\begin{itemize}
+    \item Hilbert space $\mathcal{H}$ of physical states
+    \item Quantum fields as operator-valued distributions
+    \item Observable correspond to self-adjoint operators
+\end{itemize}
+
+\subsubsection{Self-Adjoint Operators}
+\begin{itemize}
+    \item Definition: $A = A^*$ with $\mathrm{Dom}(A) = \mathrm{Dom}(A^*)$
+    \item Spectral theorem for self-adjoint operators
+    \item Projection-valued measures (spectral measures)
+    \item Functional calculus: $f(A)$ for measurable functions $f$
+    \item Stone's theorem for unitary groups
+    \item Essential self-adjointness
+    \item Deficiency indices
+\end{itemize}
+
+\textbf{Physical Operators:}
+\begin{itemize}
+    \item Hamiltonian $H$ (energy): self-adjoint, $H \geq 0$
+    \item Momentum $\vec{P}$: self-adjoint, generators of spatial translations
+    \item Mass operator: $M = \sqrt{H^2 - \vec{P}^2}$
+\end{itemize}
+
+\subsubsection{Spectral Theory}
+\begin{itemize}
+    \item Spectrum: $\sigma(A) = \sigma_{\text{point}} \cup \sigma_{\text{cont}} \cup \sigma_{\text{res}}$
+    \item Point spectrum (eigenvalues), continuous spectrum, residual spectrum
+    \item Spectral resolution: $A = \int \lambda \, dE(\lambda)$
+    \item Spectral gap: open interval in complement of spectrum
+    \item Weyl's criterion for essential spectrum
+    \item Min-max principle for eigenvalues
+    \item Perturbation theory: Kato-Rellich theorem
+\end{itemize}
+
+\textbf{Mass Gap Definition:}
+The theory has a mass gap $\Delta > 0$ if:
+\begin{equation}
+    \sigma(H) \cap (0, \Delta) = \emptyset \quad \text{and} \quad 0 \in \sigma(H)
+\end{equation}
+This means the vacuum has zero energy, and the first excited state has energy at least $\Delta$.
+
+\subsubsection{Representation Theory of Lie Groups}
+\begin{itemize}
+    \item Unitary representations on Hilbert spaces
+    \item Irreducible representations (Schur's lemma)
+    \item Induced representations and Mackey theory
+    \item Peter-Weyl theorem for compact groups
+    \item Clebsch-Gordan decomposition
+    \item Weight spaces and highest weight theory
+    \item Characters and character formulas
+\end{itemize}
+
+\textbf{Poincaré Group Representations:}
+\begin{itemize}
+    \item Lorentz group $\mathrm{SO}(3,1)$ and its universal cover $\mathrm{SL}(2, \mathbb{C})$
+    \item Poincaré group: semidirect product of Lorentz and translations
+    \item Positive energy representations (required by physics)
+    \item Classification by mass $m$ and spin $s$
+    \item Massless representations and helicity
+\end{itemize}
+
+\subsubsection{Sobolev Spaces}
+\begin{itemize}
+    \item $L^p$ spaces: $\|f\|_p = \left(\int |f|^p\right)^{1/p}$
+    \item Weak derivatives and distributions
+    \item Sobolev spaces $W^{k,p}(\Omega)$ and $H^k(\Omega) = W^{k,2}(\Omega)$
+    \item Sobolev norms: $\|f\|_{H^k} = \sum_{|\alpha| \leq k} \|D^\alpha f\|_{L^2}$
+    \item Sobolev embedding theorems
+    \item Rellich-Kondrachov compactness theorem
+    \item Trace theorems for boundary values
+    \item Sobolev inequalities (Gagliardo-Nirenberg, Poincaré)
+\end{itemize}
+
+\textbf{Role in Yang-Mills:}
+\begin{itemize}
+    \item Regularity theory for gauge fields
+    \item Control of ultraviolet divergences
+    \item Energy estimates for field configurations
+    \item Balaban's work uses Sobolev norms for geometric effects
+\end{itemize}
+
+\subsection{Quantum Field Theory Framework}
+
+\subsubsection{Wightman Axioms}
+The Wightman axioms provide a mathematically rigorous formulation of relativistic QFT:
+\begin{enumerate}
+    \item \textbf{Hilbert Space:} Quantum states form a separable Hilbert space $\mathcal{H}$
+    \item \textbf{Poincaré Covariance:} Continuous unitary representation $U(a, \Lambda)$ of Poincaré group
+    \item \textbf{Vacuum State:} Unique (up to phase) Poincaré-invariant state $\Omega$
+    \item \textbf{Positive Energy:} Spectrum of $H$ contained in $[0, \infty)$
+    \item \textbf{Fields:} Operator-valued tempered distributions $\phi(x)$ on $\mathcal{H}$
+    \item \textbf{Locality:} Fields at spacelike separation commute (or anticommute for fermions)
+    \item \textbf{Cyclicity:} Vacuum is cyclic: fields acting on $\Omega$ span dense subspace of $\mathcal{H}$
+\end{enumerate}
+
+\textbf{Correlation Functions:}
+Wightman functions: $W_n(x_1, \ldots, x_n) = \langle \Omega, \phi(x_1) \cdots \phi(x_n) \Omega \rangle$
+
+\subsubsection{Osterwalder-Schrader Axioms (Euclidean Formulation)}
+Euclidean formulation via analytic continuation $t \to -i\tau$:
+\begin{enumerate}
+    \item \textbf{Euclidean Invariance:} Schwinger functions invariant under $\mathrm{O}(4)$
+    \item \textbf{Reflection Positivity:} Key positivity condition for time reflection
+    \item \textbf{Symmetry:} Permutation symmetry in arguments
+    \item \textbf{Cluster Property:} Decay of correlations at large separations
+    \item \textbf{Regularity:} Schwinger functions are distributions
+\end{enumerate}
+
+\textbf{Schwinger Functions:}
+$S_n(x_1, \ldots, x_n) = W_n(x_1, \ldots, x_n)|_{t_j \to -i\tau_j}$
+
+\subsubsection{Reflection Positivity}
+Critical property connecting Euclidean and Minkowski formulations:
+\begin{itemize}
+    \item Time-reflection operator $\Theta: (t, \vec{x}) \mapsto (-t, \vec{x})$
+    \item For functions $f$ with support in $t > 0$: $\langle \Theta f, f \rangle \geq 0$
+    \item Allows reconstruction of Hilbert space from Euclidean measure
+    \item Preserved by Wilson lattice action
+    \item Often lost by other regularization schemes
+\end{itemize}
+
+\textbf{Osterwalder-Schrader Reconstruction:}
+Reflection positivity enables construction of Minkowski QFT from Euclidean measure $d\mu$ satisfying OS axioms.
+
+\subsubsection{Operator Product Expansion}
+Asymptotic behavior of products at short distances:
+\begin{equation}
+    \phi_i(x) \phi_j(0) \sim \sum_k C_{ijk}(x) \phi_k(0) \quad \text{as } x \to 0
+\end{equation}
+\begin{itemize}
+    \item Wilson coefficients $C_{ijk}(x)$ are singular as $x \to 0$
+    \item Governed by renormalization group and anomalous dimensions
+    \item Essential for understanding short-distance behavior
+    \item Predicted by asymptotic freedom in Yang-Mills
+\end{itemize}
+
+\subsection{Measure Theory and Probability}
+
+\subsubsection{Gaussian and Non-Gaussian Measures}
+\begin{itemize}
+    \item Gaussian measures on finite-dimensional spaces
+    \item Infinite-dimensional Gaussian measures (abstract Wiener spaces)
+    \item Covariance operators for Gaussian measures
+    \item Free field corresponds to Gaussian measure
+    \item Interacting fields require non-Gaussian measures
+    \item Moment generating functions
+    \item Characteristic functionals
+\end{itemize}
+
+\textbf{Example:}
+Free scalar field with mass $m_0$: Gaussian measure with covariance $(-\Delta + m_0^2)^{-1}$.
+
+\subsubsection{Measure Spaces on $\mathcal{S}'(\mathbb{R}^4)$}
+\begin{itemize}
+    \item Space of tempered distributions $\mathcal{S}'(\mathbb{R}^4)$
+    \item Cylinder set measures
+    \item $\sigma$-algebras on infinite-dimensional spaces
+    \item Borel measures on distribution spaces
+    \item Minlos theorem for characteristic functionals
+    \item Support properties of measures
+\end{itemize}
+
+\textbf{QFT as Probability Theory:}
+Quantum field theory can be formulated as measure theory on $\mathcal{S}'(\mathbb{R}^4)$ with expectations:
+\begin{equation}
+    \langle F[\phi] \rangle = \int F[\phi] \, d\mu(\phi)
+\end{equation}
+
+\subsubsection{Functional Integration}
+\begin{itemize}
+    \item Formal path integrals: $\int e^{-S[\phi]} \mathcal{D}\phi$
+    \item Euclidean action functional $S[\phi]$
+    \item Feynman-Kac formula
+    \item Wiener measure and Brownian motion
+    \item Rigorous construction via Wiener integrals
+    \item Gaussian integration by parts
+    \item Perturbative expansions from functional integrals
+\end{itemize}
+
+\subsubsection{Markov Fields}
+\begin{itemize}
+    \item Markov property: conditional independence
+    \item Nelson's reconstruction from Markov fields
+    \item Symanzik's interpretation of Euclidean QFT
+    \item Connection to stochastic processes
+    \item Ergodicity and mixing properties
+\end{itemize}
+
+\subsection{Renormalization Theory}
+
+\subsubsection{Perturbation Theory Divergences}
+\begin{itemize}
+    \item Ultraviolet (UV) divergences: short-distance singularities
+    \item Infrared (IR) divergences: long-distance/massless particle issues
+    \item Loop integrals in Feynman diagrams
+    \item Power counting and superficial degree of divergence
+    \item Overlapping divergences
+    \item Subdivergences and nested divergences
+\end{itemize}
+
+\subsubsection{Counterterms and Renormalization Constants}
+\begin{itemize}
+    \item Bare vs. renormalized quantities
+    \item Wave function renormalization: $Z_\phi$
+    \item Coupling constant renormalization: $g_0 = Z_g g$
+    \item Mass renormalization: $m_0^2 = m^2 + \delta m^2$
+    \item Minimal subtraction schemes (MS, $\overline{\text{MS}}$)
+    \item Momentum subtraction schemes
+    \item BPHZ renormalization procedure
+    \item Zimmermann forest formula
+\end{itemize}
+
+\subsubsection{Asymptotic Freedom}
+Unique property of non-abelian gauge theories in 4D:
+\begin{itemize}
+    \item Running coupling constant $g(\mu)$ decreases at high energy
+    \item $\beta$-function: $\beta(g) = \mu \frac{dg}{d\mu}$
+    \item One-loop result: $\beta(g) = -\beta_0 g^3 + O(g^5)$ with $\beta_0 > 0$
+    \item Asymptotic freedom: $\beta_0 = \frac{1}{16\pi^2}\left(\frac{11}{3}C_2(G) - \frac{4}{3}T(R)n_f\right) > 0$
+    \item For pure Yang-Mills ($n_f = 0$): always asymptotically free
+    \item Weak coupling at short distances enables perturbative calculations
+    \item Strong coupling at long distances (confinement scale $\Lambda_{\text{QCD}}$)
+\end{itemize}
+
+\subsubsection{Cluster Expansions}
+\begin{itemize}
+    \item Mayer cluster expansion from statistical mechanics
+    \item Polymer models and contour models
+    \item Phase space localization
+    \item Decoupling estimates between clusters
+    \item Convergence proofs via combinatorics
+    \item Applications to proving exponential decay
+    \item Multi-scale analysis
+\end{itemize}
+
+\subsubsection{Renormalization Group Transformations}
+\begin{itemize}
+    \item Block-spin transformations
+    \item Integration of high-momentum modes
+    \item Rescaling after mode elimination
+    \item Fixed points and critical phenomena
+    \item Relevant, irrelevant, and marginal operators
+    \item Wilson-Polchinski equation
+    \item Exact renormalization group
+\end{itemize}
+
+\subsection{Analysis}
+
+\subsubsection{Partial Differential Equations}
+\begin{itemize}
+    \item Wave equation: $\Box \phi = (\partial_t^2 - \nabla^2)\phi = 0$
+    \item Klein-Gordon equation: $(\Box + m^2)\phi = 0$
+    \item Yang-Mills equations: $d_A *F = 0$
+    \item Elliptic, parabolic, and hyperbolic PDEs
+    \item Cauchy problem and well-posedness
+    \item Energy estimates and conservation laws
+    \item Weak solutions and distributional solutions
+    \item Regularity theory: smoothness of solutions
+\end{itemize}
+
+\subsubsection{Fourier Analysis}
+\begin{itemize}
+    \item Fourier transform: $\tilde{f}(k) = \int e^{-ikx} f(x) dx$
+    \item Plancherel theorem and Parseval's identity
+    \item Convolution theorem
+    \item Fourier series on compact spaces
+    \item Uncertainty principle
+    \item Distributions and Fourier transform of distributions
+    \item Poisson summation formula
+\end{itemize}
+
+\subsubsection{Regularity Theory (UV and IR)}
+\begin{itemize}
+    \item Ultraviolet (UV) regularity: behavior at high momenta/short distances
+    \item Infrared (IR) regularity: behavior at low momenta/long distances
+    \item Cutoff schemes: momentum cutoff $\kappa$, lattice spacing $a$
+    \item Regularity vs. singularity of field operators
+    \item Local singularities and point-splitting
+    \item Schwinger functions' differentiability properties
+\end{itemize}
+
+\subsubsection{Exponential Decay Estimates}
+\begin{itemize}
+    \item Correlation decay: $|\langle O(x)O(y) \rangle| \leq Ce^{-m|x-y|}$
+    \item Mass as decay rate of correlation functions
+    \item Combes-Thomas method
+    \item Transfer matrix techniques
+    \item Perron-Frobenius theory
+    \item Spectral gap implies exponential decay
+\end{itemize}
+
+\subsection{Statistical Mechanics}
+
+\subsubsection{Partition Functions}
+\begin{itemize}
+    \item Canonical ensemble: $Z = \sum_i e^{-\beta E_i}$ or $Z = \int e^{-S[\phi]} \mathcal{D}\phi$
+    \item Free energy: $F = -\frac{1}{\beta}\log Z$
+    \item Correlation functions from derivatives of $Z$
+    \item Generating functionals
+    \item Connection to QFT via Euclidean formulation
+\end{itemize}
+
+\subsubsection{Phase Transitions}
+\begin{itemize}
+    \item First-order and second-order transitions
+    \item Order parameters
+    \item Spontaneous symmetry breaking
+    \item Critical points and critical exponents
+    \item Universality classes
+    \item Ising model and $\phi^4$ theory
+    \item Kosterlitz-Thouless transition
+\end{itemize}
+
+\subsubsection{Correlation Functions and Clustering}
+\begin{itemize}
+    \item Two-point function: $G(x,y) = \langle \phi(x)\phi(y) \rangle$
+    \item Connected correlation functions
+    \item Truncated correlations (cumulants)
+    \item Clustering: $\lim_{|x-y| \to \infty} \langle \phi(x)\phi(y) \rangle_c = 0$
+    \item Exponential clustering in gapped systems
+    \item Power-law decay at critical points
+\end{itemize}
+
+\subsubsection{Lattice Field Theory}
+\begin{itemize}
+    \item Discretization of spacetime: hypercubic lattice $\mathbb{Z}^4$
+    \item Lattice spacing $a$ and continuum limit $a \to 0$
+    \item Wilson action for gauge theories
+    \item Fermions on the lattice (doubling problem)
+    \item Staggered, Wilson, and domain-wall fermions
+    \item Monte Carlo simulations on lattice
+    \item Transfer matrix formalism
+\end{itemize}
+
+\subsection{Specific Techniques}
+
+\subsubsection{Wilson Lattice Gauge Theory}
+\begin{itemize}
+    \item Gauge fields as group-valued link variables: $U_\mu(x) \in G$
+    \item Parallel transporters along links
+    \item Plaquette variables: $U_p = U_{\mu}(x)U_\nu(x+\hat{\mu})U_\mu^\dagger(x+\hat{\nu})U_\nu^\dagger(x)$
+    \item Wilson action: $S = -\frac{\beta}{2}\sum_p \operatorname{Tr}(U_p + U_p^\dagger)$
+    \item Continuum limit: $U_\mu(x) \approx e^{iaA_\mu(x)}$
+    \item Strong coupling expansion
+    \item Weak coupling (continuum) limit
+\end{itemize}
+
+\subsubsection{BRST Formalism}
+Becchi-Rouet-Stora-Tyutin quantization of gauge theories:
+\begin{itemize}
+    \item Ghost fields $c$ and antighost fields $\bar{c}$
+    \item BRST operator $Q$ with $Q^2 = 0$
+    \item BRST cohomology: physical states are $Q$-closed modulo $Q$-exact
+    \item Gauge-fixed action: $S_{\text{GF}} = S_{\text{YM}} + Q(\cdots)$
+    \item Slavnov-Taylor identities (Ward identities for BRST)
+    \item Quantum master equation
+\end{itemize}
+
+\subsubsection{Gauge Fixing Procedures}
+\begin{itemize}
+    \item Need to fix gauge redundancy in path integral
+    \item Faddeev-Popov gauge fixing
+    \item Faddeev-Popov determinant: $\det(\partial^\mu D_\mu)$
+    \item Lorenz gauge: $\partial^\mu A_\mu = 0$
+    \item Coulomb gauge: $\nabla \cdot \vec{A} = 0$
+    \item Axial gauges: $n^\mu A_\mu = 0$
+    \item Gribov ambiguities: non-uniqueness of gauge fixing
+    \item Fundamental modular region (Gribov region)
+\end{itemize}
+
+\subsubsection{Phase Space Localization Methods}
+\begin{itemize}
+    \item Decomposition of phase space into momentum shells
+    \item Littlewood-Paley decomposition
+    \item Battle-Federbush construction
+    \item Multiscale analysis
+    \item Effective theories at different scales
+    \item Phase cell decomposition (Balaban's approach)
+    \item Inductive renormalization
+\end{itemize}
+
+\subsection{Summary and Interdependencies}
+
+The Yang-Mills Mass Gap Problem sits at the intersection of:
+\begin{itemize}
+    \item \textbf{Geometry:} Principal bundles, connections, curvature
+    \item \textbf{Analysis:} PDEs, functional analysis, regularity theory
+    \item \textbf{Probability:} Measures on infinite-dimensional spaces, functional integration
+    \item \textbf{Physics:} Quantum field theory axioms, gauge symmetry, renormalization
+    \item \textbf{Algebra:} Lie groups, representation theory, operator algebras
+\end{itemize}
+
+\textbf{The Core Challenge:}
+Proving that a non-trivial 4D quantum Yang-Mills theory exists on $\mathbb{R}^4$ and has a mass gap $\Delta > 0$, satisfying all axioms (Wightman or Osterwalder-Schrader), remains one of the deepest open problems in mathematical physics. The $\$1{,}000{,}000$ Millennium Prize awaits a complete solution.

@@ -32,3 +32,6 @@ Thumbs.db
 # Build artifacts that might be generated
 build/
 dist/
+markdown/
+LICENSE.md
+*venv/
