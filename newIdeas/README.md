@@ -6,11 +6,22 @@ Ideas to explore, potential research directions, and future work.
 
 ## How to Use
 
-When you have a new idea:
+### Quick Capture (Recommended)
 
+**Just mention your idea in conversation** - AI will automatically:
 1. Create a new file: `YYYY-MM-DD-topic-name.md`
-2. Use the template below
-3. Add to the index in this README
+2. Fill out the template with your idea
+3. Add it to the index below
+
+Example: "I have an idea about using √2 scaling for graph algorithms"
+
+### Manual Creation
+
+If you prefer to create manually:
+
+1. Copy `template.md` to `YYYY-MM-DD-topic-name.md`
+2. Fill it out
+3. Add link to index below
 
 ---
 
