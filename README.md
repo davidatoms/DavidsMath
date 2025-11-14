@@ -50,7 +50,13 @@ DavidsMath/
 │   ├── Scripts for analysis
 │   └── graphs/          # Visualizations
 ├── docs/                # Documentation and findings
-└── needsImprovement/    # Work that needs more development
+├── logs/                # Research logs and tracking
+│   └── RESEARCH_LOG.md  # Main research log
+├── newIdeas/            # Ideas to explore
+│   ├── README.md        # Index and template
+│   └── *.md             # Individual idea files
+├── needsImprovement/    # Work that needs more development
+└── STATUS_SYSTEM.md    # Status labeling convention
 ```
 
 ---

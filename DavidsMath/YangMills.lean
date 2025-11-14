@@ -41,26 +41,26 @@ namespace YangMillsFoundations
 
   -- Minkowski spacetime as our base manifold
   def Spacetime : Type* := EuclideanSpace ℝ (Fin 4)
-  
+
   -- Minkowski metric tensor
-  noncomputable def minkowski_metric : 
-    (Fin 4) → (Fin 4) → ℝ := fun μ ν ↦ 
+  noncomputable def minkowski_metric :
+    (Fin 4) → (Fin 4) → ℝ := fun μ ν ↦
     if μ = 0 ∧ ν = 0 then -1
     else if μ = ν ∧ μ ≠ 0 then 1
     else 0
 
   -- Basic Lie groups available in Mathlib that we can use
   section LieGroupExamples
-    
+
     -- SU(2) - fundamental gauge group for weak interactions
     example : LieGroup ℝ (Matrix.SpecialUnitaryGroup (Fin 2) ℝ) := inferInstance
-    
+
     -- SO(3) - rotation group
     example : LieGroup ℝ (Matrix.SpecialOrthogonalGroup (Fin 3) ℝ) := inferInstance
-    
+
     -- General linear group
     example : LieGroup ℝ (Matrix.GeneralLinearGroup (Fin 3) ℝ) := inferInstance
-    
+
   end LieGroupExamples
 
   -- Vector fields on spacetime (using Mathlib's tangent bundle)
@@ -77,23 +77,23 @@ namespace YangMillsFoundations
 
   -- Field strength tensor F_μν = ∂_μ A_ν - ∂_ν A_μ + [A_μ, A_ν]
   -- (Simplified version using what's available in Mathlib)
-  noncomputable def fieldStrength (A : GaugePotential) (μ ν : Fin 4) : Spacetime → ℝ × ℝ × ℝ := 
-    fun x ↦ 
+  noncomputable def fieldStrength (A : GaugePotential) (μ ν : Fin 4) : Spacetime → ℝ × ℝ × ℝ :=
+    fun x ↦
       let ∂μAν := fderiv ℝ (A.components ν) x (EuclideanSpace.single μ 1)
       let ∂νAμ := fderiv ℝ (A.components μ) x (EuclideanSpace.single ν 1)
       let commutator := sorry -- [A_μ, A_ν] - need Lie bracket structure
-      (∂μAν.1 - ∂νAμ.1 + commutator.1, 
-       ∂μAν.2.1 - ∂νAμ.2.1 + commutator.2.1, 
+      (∂μAν.1 - ∂νAμ.1 + commutator.1,
+       ∂μAν.2.1 - ∂νAμ.2.1 + commutator.2.1,
        ∂μAν.2.2 - ∂νAμ.2.2 + commutator.2.2)
 
   -- Yang-Mills action functional S = -1/4 ∫ F_μν F^μν d⁴x
-  noncomputable def yangMillsAction (A : GaugePotential) : ℝ := 
+  noncomputable def yangMillsAction (A : GaugePotential) : ℝ :=
     (-1/4) * sorry -- ∫ over spacetime of ||F_μν||² with Minkowski metric
 
   -- Yang-Mills equations: D_μ F^μν = 0 (in vacuum)
   def satisfiesYangMillsEquation (A : GaugePotential) : Prop :=
     ∀ x : Spacetime, ∀ ν : Fin 4,
-      (Finset.univ.sum fun μ ↦ 
+      (Finset.univ.sum fun μ ↦
         fderiv ℝ (fun y ↦ (fieldStrength A μ ν y).1) x (EuclideanSpace.single μ 1)) = 0
       -- This is a simplified version - need proper covariant derivative
 
@@ -105,16 +105,16 @@ end YangMillsFoundations
 -- =============================================================================
 
 namespace AdvancedDifferentialGeometry
-  
-  /-! 
+
+  /-!
   ## Principal Bundles and Connections
-  
+
   This section will contain:
   - Principal G-bundles over spacetime manifolds
-  - Connection forms and covariant derivatives  
+  - Connection forms and covariant derivatives
   - Curvature forms and the Bianchi identities
   - Gauge transformations and gauge fixing
-  
+
   Key structures to implement:
   ```lean
   structure PrincipalBundle (G : Type*) (M : Type*) [LieGroup ℝ G] [Manifold M] :=
@@ -122,25 +122,25 @@ namespace AdvancedDifferentialGeometry
     (projection : total_space → M)
     (right_action : G → total_space → total_space)
     (local_trivialization : LocallyTrivialized)
-    
+
   structure Connection (P : PrincipalBundle G M) :=
     (connection_form : ∀ p : P.total_space, TangentSpace p → LieAlgebra G)
     (equivariance : GaugeEquivariant connection_form)
-    
-  def curvature_form (ω : Connection P) : TwoForm P (LieAlgebra G) := 
+
+  def curvature_form (ω : Connection P) : TwoForm P (LieAlgebra G) :=
     exterior_derivative ω + (1/2) • lie_bracket_form ω ω
   ```
   -/
-  
+
   -- Placeholder for principal bundle theory
   axiom PrincipalBundle (G M : Type*) [LieGroup ℝ G] [Manifold M] : Type*
   axiom Connection (G M : Type*) [LieGroup ℝ G] [Manifold M] : Type*
-  axiom curvature_two_form {G M : Type*} [LieGroup ℝ G] [Manifold M] : 
+  axiom curvature_two_form {G M : Type*} [LieGroup ℝ G] [Manifold M] :
     Connection G M → Type* -- Will be 2-form with values in Lie algebra
 
 end AdvancedDifferentialGeometry
 
--- =============================================================================  
+-- =============================================================================
 -- PART III: LIE THEORY AND GAUGE GROUPS (TO BE DEVELOPED)
 -- Non-abelian gauge theory, structure constants, representations
 -- =============================================================================
@@ -149,21 +149,21 @@ namespace LieTheoryAndGaugeGroups
 
   /-!
   ## Non-Abelian Gauge Theory
-  
+
   This section will contain:
   - Compact Lie groups (SU(n), SO(n), Sp(n), exceptional groups)
   - Lie algebra representations and structure constants
   - Root systems and weight spaces
   - Gauge group actions on matter fields
-  
+
   Key structures to implement:
   ```lean
   class CompactLieGroup (G : Type*) extends LieGroup ℝ G, CompactSpace G
-  
-  def structure_constants (𝔤 : Type*) [LieAlgebra ℝ 𝔤] (basis : Basis ι ℝ 𝔤) : 
-    ι → ι → ι → ℝ := 
+
+  def structure_constants (𝔤 : Type*) [LieAlgebra ℝ 𝔤] (basis : Basis ι ℝ 𝔤) :
+    ι → ι → ι → ℝ :=
     fun i j k ↦ basis.repr (⁅basis i, basis j⁆) k
-    
+
   class GaugeGroup (G : Type*) extends CompactLieGroup G :=
     (representations : Type* → Representation G)
     (gauge_field_coupling : ℝ)
@@ -186,24 +186,24 @@ namespace QuantumFieldTheory
 
   /-!
   ## Quantum Yang-Mills Theory
-  
+
   This section will contain:
   - Path integral formulation of Yang-Mills theory
   - Quantum correlation functions and Green's functions
   - Renormalization theory and beta functions
   - BRST symmetry and gauge fixing
   - Mass gap problem and confinement
-  
+
   Key structures to implement:
   ```lean
   structure QuantumYangMills (G : Type*) [CompactLieGroup G] :=
     (path_integral : MeasureTheory.Measure (Space.GaugeFields G))
     (correlation_functions : ∀ n : ℕ, (Fin n → Operator G) → ℂ)
     (vacuum_state : State G)
-    
+
   def mass_gap (theory : QuantumYangMills G) : ℝ :=
     sInf {E | ∃ state ≠ theory.vacuum_state, energy state = E}
-    
+
   theorem mass_gap_conjecture (G : Type*) [CompactSimpleGroup G] :
     ∃ theory : QuantumYangMills G, mass_gap theory > 0
   ```
@@ -221,7 +221,7 @@ namespace QuantumFieldTheory
 end QuantumFieldTheory
 
 -- =============================================================================
--- PART V: FUNCTIONAL ANALYSIS (TO BE DEVELOPED) 
+-- PART V: FUNCTIONAL ANALYSIS (TO BE DEVELOPED)
 -- Sobolev spaces, regularity theory, existence theorems
 -- =============================================================================
 
@@ -229,27 +229,27 @@ namespace FunctionalAnalysis
 
   /-!
   ## Analysis for Yang-Mills Fields
-  
+
   This section will contain:
   - Sobolev spaces H^k for gauge fields
   - Regularity theory for Yang-Mills equations
   - Existence and uniqueness theorems
   - Energy bounds and concentration compactness
   - Moduli spaces of solutions
-  
+
   Key structures to implement:
   ```lean
-  def SobolevSpace (k : ℕ) (Ω : Set (EuclideanSpace ℝ (Fin 4))) 
-    (G : Type*) [LieGroup ℝ G] : Type* := 
+  def SobolevSpace (k : ℕ) (Ω : Set (EuclideanSpace ℝ (Fin 4)))
+    (G : Type*) [LieGroup ℝ G] : Type* :=
     {A : Ω → LieAlgebra G // ∫ x in Ω, ||D^k A x||^2 < ∞}
-    
+
   theorem regularity_yangmills :
-    ∀ A ∈ SobolevSpace 1 Ω G, satisfiesYangMillsEquation A → 
+    ∀ A ∈ SobolevSpace 1 Ω G, satisfiesYangMillsEquation A →
       A ∈ SobolevSpace ∞ Ω G
-      
+
   theorem existence_yangmills :
-    ∀ (initial_data : InitialData), ∃ A : Solution, 
-      satisfiesYangMillsEquation A ∧ 
+    ∀ (initial_data : InitialData), ∃ A : Solution,
+      satisfiesYangMillsEquation A ∧
       finite_energy A ∧
       has_initial_data A initial_data
   ```
@@ -282,8 +282,8 @@ namespace MillenniumProblem
     -- there exists a quantum Yang-Mills theory on ℝ⁴ such that:
     ∃ (theory : QuantumFieldTheory.QuantumYangMills G),
       -- 1. The theory has a unique vacuum state
-      (∃! vacuum : QuantumFieldTheory.QuantumState, 
-        QuantumFieldTheory.energy vacuum = 
+      (∃! vacuum : QuantumFieldTheory.QuantumState,
+        QuantumFieldTheory.energy vacuum =
         sInf {E | ∃ state, QuantumFieldTheory.energy state = E}) ∧
       -- 2. There is a mass gap Δ > 0
       (∃ Δ > 0, ∀ state ≠ vacuum,
@@ -306,31 +306,31 @@ namespace MillenniumProblem
     -- 1. Local existence via energy methods
     -- 2. Global existence via finite propagation speed
     -- 3. Regularity via bootstrapping argument
-    
+
     -- Step 1: Construct approximate solutions
     let A₀ := flat_connection -- Start with flat connection
-    
+
     -- Step 2: Use iteration scheme (Picard-Lindelöf type)
     -- Define Aₙ₊₁ as solution to linearized equation around Aₙ
     have iteration_converges : ∃ A_limit, sorry := sorry
-    
-    -- Step 3: Show limit satisfies Yang-Mills equations  
+
+    -- Step 3: Show limit satisfies Yang-Mills equations
     obtain ⟨A, hA_limit⟩ := iteration_converges
     use A
-    
+
     constructor
     · -- Proves satisfiesYangMillsEquation A
       intro x ν
       simp [satisfiesYangMillsEquation]
       -- Use limiting argument from iteration
       sorry
-    
-    constructor  
+
+    constructor
     · -- Proves finite_energy A
       simp [FunctionalAnalysis.finite_energy]
       -- Energy is conserved under Yang-Mills flow
       sorry
-    
+
     · -- Proves smooth_solution A
       simp [FunctionalAnalysis.smooth_solution]
       -- Regularity follows from elliptic bootstrapping

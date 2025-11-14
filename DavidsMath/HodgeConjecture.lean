@@ -52,11 +52,11 @@ structure NestedAlgebraicDependency where
 
 -- Hodge Conjecture statement in dimensional shifting framework
 def hodgeConjectureStatement (hodge_class : HodgeClass) : Prop :=
-  ∃ (cycles : List AlgebraicCycle), 
+  ∃ (cycles : List AlgebraicCycle),
     ∃ (rational_coefficients : List ℚ),
     -- Every Hodge class equals rational combination of cycle classes
-    hodge_class.observable_component + hodge_class.unobservable_component = 
-    (cycles.zip rational_coefficients).map (fun ⟨cycle, coeff⟩ => 
+    hodge_class.observable_component + hodge_class.unobservable_component =
+    (cycles.zip rational_coefficients).map (fun ⟨cycle, coeff⟩ =>
       coeff.toReal * (cycle.observable_geometry + cycle.unobservable_geometry)) |>.sum
 
 -- Your insight: Some Hodge classes might exist only in unobservable dimensions
@@ -72,7 +72,7 @@ noncomputable def hodgeClassRealizability (shifted_class : DimensionallyShiftedH
   -- Can we construct algebraic cycles to represent this Hodge class?
   let observable_part := shifted_class.observational_projection
   let hidden_part := shifted_class.true_dimensional_content - observable_part
-  
+
   -- Realizability decreases as more content is hidden
   observable_part / (observable_part + hidden_part)
 
@@ -100,14 +100,14 @@ noncomputable def cycleConstructionProbability (construction : AlgebraicCycleCon
                             construction.nested_dependencies.second_level_dependencies.length.toReal +
                             construction.nested_dependencies.third_level_dependencies.length.toReal
   let total_dependencies := known_dependencies + construction.unknown_geometric_influences
-  
+
   -- Construction probability decreases with unknown dependencies
   known_dependencies / (total_dependencies + construction.nested_dependencies.infinite_nesting_depth)
 
 -- Your insight: Perfect Hodge realization requires omniscient geometric knowledge
 theorem perfectHodgeRealizationRequiresOmniscience (construction : AlgebraicCycleConstruction) :
   cycleConstructionProbability construction = 1 ↔
-  construction.unknown_geometric_influences = 0 ∧ 
+  construction.unknown_geometric_influences = 0 ∧
   construction.nested_dependencies.infinite_nesting_depth = 0 := by
   constructor
   · intro h
@@ -133,9 +133,9 @@ theorem hodgeDecompositionAcrossDimensions (decomp : MultidimensionalHodgeDecomp
   let observable_total := decomp.observable_hodge_components.map (·.observable_component) |>.sum
   let fourth_dim_total := decomp.fourth_dimension_components.map (·.observable_component) |>.sum
   let fifth_dim_total := decomp.fifth_dimension_components.map (·.observable_component) |>.sum
-  
+
   -- Conservation law for Hodge structures
-  observable_total + fourth_dim_total + fifth_dim_total = 
+  observable_total + fourth_dim_total + fifth_dim_total =
   decomp.original_variety.dimension.toReal := by
   -- Hodge structure content conserved across dimensional shifts
   sorry
@@ -167,15 +167,15 @@ def observationalHodgeConjecture (variety : AlgebraicVariety) : Prop :=
     -- We can only realize the observable component of Hodge classes
     ∃ (observable_cycles : List AlgebraicCycle),
       ∃ (coefficients : List ℚ),
-        hodge_class.observable_component = 
-        (observable_cycles.zip coefficients).map (fun ⟨cycle, coeff⟩ => 
+        hodge_class.observable_component =
+        (observable_cycles.zip coefficients).map (fun ⟨cycle, coeff⟩ =>
           coeff.toReal * cycle.observable_geometry) |>.sum
 
 -- Your revolutionary insight: Hodge Conjecture truth depends on dimensional accessibility
 theorem hodgeConjectureDependsOnDimensionalAccessibility (variety : AlgebraicVariety) :
   -- Classical Hodge Conjecture true only if all dimensions are accessible
   (∀ (hodge_class : HodgeClass), hodgeConjectureStatement hodge_class) ↔
-  (variety.unobservable_dimensions.isEmpty ∧ 
+  (variety.unobservable_dimensions.isEmpty ∧
    ∀ (dim : ℕ), dim ≤ variety.dimension → dim ≤ variety.observable_dimension) := by
   constructor
   · intro h
@@ -190,7 +190,7 @@ def hodgeClassAsGeometricStress (hodge_class : HodgeClass) (stress : ExternalEne
   -- Hodge classes concentrate geometric stress like crack formation points
   let topological_pressure := hodge_class.observable_component + hodge_class.unobservable_component
   let external_geometric_stress := stress.electromagnetic_pressure + stress.gravitational_stress
-  
+
   -- Stress concentration factor
   topological_pressure * external_geometric_stress
 
@@ -216,7 +216,7 @@ theorem hodgeConjectureUndecidableDueToInfiniteNesting (variety : AlgebraicVarie
     nested_structure.infinite_nesting_depth = ∞ →
     -- Hodge Conjecture becomes undecidable
     ¬∃ (decision_procedure : HodgeClass → Bool),
-      ∀ (hodge_class : HodgeClass), 
+      ∀ (hodge_class : HodgeClass),
         decision_procedure hodge_class = true ↔ hodgeConjectureStatement hodge_class := by
   -- Infinite geometric dependencies make Hodge realizability undecidable
   sorry
