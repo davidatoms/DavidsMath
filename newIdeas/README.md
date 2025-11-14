@@ -64,6 +64,9 @@ If you prefer to create manually:
 **High Priority**:
 - [Computational Geometry Applications](2025-11-14-computational-geometry.md) - Path planning, space partitioning, coverage problems
 
+**Medium Priority**:
+- [Conway's Mathematics](2025-11-14-conways-mathematics.md) - Connections between Conway's work and √2 geometric scaling
+
 **Templates**:
 - [Idea Template](template.md) - Use this as a starting point
 
