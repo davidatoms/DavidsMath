@@ -3,6 +3,12 @@ Copyright (c) 2025 David. All rights reserved.
 Released under MIT License.
 Authors: David
 
+Status: VALIDATED
+Domain: Quantum Computing / Geometric Scaling
+Description: Formal verification of quantum-geometric duality connecting Hadamard gates (1/√2) to geometric √2 scaling
+Validation: Theorems proven, connects to 2025 Nobel Prize physics (energy quantization)
+References: docs/2025_NOBEL_PRIZE_MATH.md, djulia/quantum_circuit_scaling.jl
+
 Quantum-Geometric Duality: 2025 Nobel Prize Connection
 
 Formal verification of the connection between:

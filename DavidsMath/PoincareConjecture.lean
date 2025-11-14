@@ -1,3 +1,9 @@
+-- Status: EXPLORATORY
+-- Domain: Topology / Previously Open Problem (Proven 2003)
+-- Description: Exploration of Poincaré Conjecture formalization using Mathlib
+-- Note: Conjecture was proven by Perelman (2003). This explores formal verification approaches
+-- References: Perelman's proof (2003), Mathlib formalization efforts
+--
 -- Working on the Poincaré Conjecture using Mathlib's framework
 -- The conjecture states: Every simply connected, closed 3-manifold is homeomorphic to the 3-sphere
 -- This was proven by Grigori Perelman in 2003 using Ricci flow with surgery

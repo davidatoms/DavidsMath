@@ -1,3 +1,9 @@
+-- Status: EXPLORATORY
+-- Domain: Gauge Theory / Open Problem
+-- Description: Formalization of Yang-Mills theory using Lean 4 and Mathlib
+-- Note: This is exploratory work on a Millennium Prize Problem, not a claimed solution
+-- References: Millennium Prize Problem, ongoing research
+--
 -- Yang-Mills Theory Formalization in Lean 4
 -- Building on Mathlib's existing differential geometry and Lie theory
 -- This is one of the Millennium Prize Problems in mathematical physics

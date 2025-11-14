@@ -3,14 +3,18 @@ Copyright (c) 2025 David. All rights reserved.
 Released under MIT license.
 Authors: David
 
+Status: IN_PROGRESS
+Domain: Computational Complexity / Geometric Scaling
+Description: Exploring connections between geometric scaling patterns (√2) and computational complexity classes
+Note: Initial definitions and theorems, ongoing research
+References: P vs NP problem, geometric complexity theory
+
 Geometric Complexity Theory - Experimental
 
 Exploring connections between geometric scaling patterns and computational complexity.
 
 Research Question: Can different geometric scaling factors be used to characterize
 computational complexity classes?
-
-Status: Exploratory - definitions and initial theorems
 -/
 
 import Mathlib.Data.Real.Basic

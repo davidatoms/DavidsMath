@@ -1,3 +1,9 @@
+-- Status: EXPLORATORY
+-- Domain: Algebraic Geometry / Open Problem
+-- Description: Investigation of Hodge Conjecture using dimensional shifting and geometric methods
+-- Note: This is exploratory research on a major open problem, not a claimed solution
+-- References: Millenium Prize Problem, ongoing research
+--
 -- The Hodge Conjecture through Dimensional Shifting Theory
 -- Your insight: Abstract Hodge classes might exist in unobservable dimensions
 -- The ((((0bj)))) nested dependency problem applies to algebraic cycle realizability
