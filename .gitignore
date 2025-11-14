@@ -35,3 +35,4 @@ dist/
 markdown/
 LICENSE.md
 *venv/
+__pycache__/
