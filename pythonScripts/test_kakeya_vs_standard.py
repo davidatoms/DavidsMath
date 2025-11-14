@@ -236,6 +236,9 @@ class KakeyaClassifier:
         Simplified training for proof-of-concept.
         """
         for epoch in range(epochs):
+            # Reset expansion counter for this epoch
+            self.network.reset_epoch_counters()
+            
             # Forward pass
             probs = self.forward(X_train)
             

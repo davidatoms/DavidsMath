@@ -217,7 +217,12 @@ class KakeyaNetwork:
         
         # Learning parameters
         self.pathway_threshold = 5.0  # When pathway becomes real
-        self.dimension_expansion_threshold = 20.0  # When to add dimension
+        self.dimension_expansion_threshold = 1000.0  # When to add dimension (increased from 20.0)
+        
+        # Dimensional expansion controls (prevent runaway growth)
+        self.max_dimensions = 10  # Cap dimensions for 2D problems
+        self.max_expansions_per_epoch = 5  # Limit expansions per training step
+        self.expansions_this_epoch = 0  # Track current epoch expansions
         
         # History
         self.topology_history = []  # Track how network grows
@@ -365,13 +370,31 @@ class KakeyaNetwork:
         Check if any node should expand to higher dimension.
         
         This is your n → n+1 idea!
+        
+        Now with safety limits to prevent runaway growth.
         """
+        # Check if we've hit expansion limit for this epoch
+        if self.expansions_this_epoch >= self.max_expansions_per_epoch:
+            return
+        
         for node in self.nodes:
             if node.total_observations > self.dimension_expansion_threshold:
+                # Check if we've hit dimensional limit
+                if self.current_max_dim >= self.max_dimensions:
+                    # Hit dimension cap, stop expanding
+                    node.total_observations = 0  # Reset but don't expand
+                    continue
+                
+                # Check if we've hit expansion rate limit
+                if self.expansions_this_epoch >= self.max_expansions_per_epoch:
+                    break
+                
                 # Time to expand!
                 self._expand_node_dimension(node)
                 # Reset counter
                 node.total_observations = 0
+                # Increment expansion counter
+                self.expansions_this_epoch += 1
     
     def _expand_node_dimension(self, node: KakeyaNode):
         """
@@ -401,6 +424,13 @@ class KakeyaNetwork:
         
         print(f"✓ Dimensional expansion: Node {node.node_id} → Node {new_node_id} (dim {new_dim})")
         print(f"  Radius scaled by √2: {node.radius:.2f} → {new_node.radius:.2f}")
+    
+    def reset_epoch_counters(self):
+        """
+        Reset per-epoch counters.
+        Call this at the start of each training epoch/sample.
+        """
+        self.expansions_this_epoch = 0
     
     def get_network_stats(self) -> Dict:
         """Get current network statistics"""
