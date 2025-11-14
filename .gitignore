@@ -1,38 +1,67 @@
-# Lake build directory and cache
-/.lake/
+# ==============================================================================
+# BUILD ARTIFACTS
+# ==============================================================================
 
-# Lean build outputs
+/.lake/
 *.olean
 *.ilean
 *.c
 *.o
+.lean_trace
+build/
+dist/
 
-# OS generated files
+# ==============================================================================
+# PYTHON
+# ==============================================================================
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*venv/
+.venv/
+
+# ==============================================================================
+# PERSONAL (Not research - actually private)
+# ==============================================================================
+
+# Personal strategy documents (not for public)
+docs/phd_application_strategy.md
+docs/terence_tao_outreach_strategy.md
+docs/LINKEDIN_POST_OPTIONS.md
+markdown/todos.md
+
+# Personal notes
+davidsCobbDouglasNotes.md
+
+# Internal dev notes (not research content)
+FIXES_APPLIED.md
+READY_FOR_TOMORROW.md
+TIMESTAMP_FEATURES.md
+REPOSITORY_CLEANUP_PLAN.md
+
+# Self-labeled as needing work
+needsImprovement/
+
+# Old code that's not part of main research
+code/
+matlabScripts/
+
+# ==============================================================================
+# OS / EDITOR / TEMP
+# ==============================================================================
+
 .DS_Store
-.DS_Store?
 ._*
-.Spotlight-V100
 .Trashes
-ehthumbs.db
 Thumbs.db
-
-# Editor files
 .vscode/settings.json
 *.swp
 *.swo
 *~
-
-# Temporary files
 *.tmp
 *.temp
-
-# Lean Language Server
-.lean_trace
-
-# Build artifacts that might be generated
-build/
-dist/
-markdown/
-LICENSE.md
-*venv/
-__pycache__/
+*.log
+test_results*.txt
+pythonScripts/*.log

@@ -1,16 +1,29 @@
--- This module serves as the root of the `DavidsMath` library.
--- Import modules here that should be built as part of the library.
+-- David's Mathematics Library
+--
+-- Explorations in formal mathematics including:
+-- - Geometric √2 scaling framework
+-- - Major open problems (Hodge, Yang-Mills, Poincaré)
+-- - Quantum-geometric connections
+-- - Computational complexity theory
+
 import DavidsMath.Basic
+import DavidsMath.GeometricAnalysis
+import DavidsMath.Computational
+import DavidsMath.NumberTheory
+
+-- √2 Scaling Framework (core work)
+import DavidsMath.ScalingAlgorithmDerivatives_v2
+import DavidsMath.QuantumGeometricDuality
+import DavidsMath.GeometricComplexity
+
+-- Major Open Problems (explorations)
 import DavidsMath.PoincareConjecture
+import DavidsMath.HodgeConjecture
 import DavidsMath.YangMills
-import DavidsMath.YangMillsDependencies
+
+-- Supporting modules
 import DavidsMath.MinkowskiSpace
 import DavidsMath.AtomicGeometry
-import DavidsMath.1ScalingAlgorithmInscribedCircleSquare
-import DavidsMath.ScalingAlgorithmDerivatives
-import DavidsMath.ScalingAlgorithmDerivatives_v2
-import DavidsMath.GeometricComplexity
-import DavidsMath.QuantumGeometricDuality
 
 require mathlib from git
   "https://github.com/leanprover-community/mathlib4.git"
