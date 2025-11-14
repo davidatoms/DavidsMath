@@ -18,6 +18,7 @@ import matplotlib.pyplot as plt
 from sklearn.datasets import make_circles, make_moons
 from sklearn.model_selection import train_test_split
 import time
+from datetime import datetime
 from typing import Tuple, Dict, List
 import math
 
@@ -381,8 +382,11 @@ def test_on_dataset(
 # VISUALIZATION
 # ============================================================================
 
-def visualize_results(dataset_name: str, X: np.ndarray, y: np.ndarray, results: Dict):
-    """Create comprehensive visualization of results."""
+def visualize_results(dataset_name: str, X: np.ndarray, y: np.ndarray, results: Dict, timestamp: str = None):
+    """Create comprehensive visualization of results with timestamp."""
+    
+    if timestamp is None:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
     fig = plt.figure(figsize=(18, 10))
     
@@ -498,12 +502,13 @@ def visualize_results(dataset_name: str, X: np.ndarray, y: np.ndarray, results: 
     ax9.set_title('Kakeya Network Growth')
     ax9.grid(True, alpha=0.3, axis='y')
     
-    # Overall title
-    fig.suptitle(f'{dataset_name}: Kakeya vs Standard Neural Network', 
+    # Overall title with timestamp
+    fig.suptitle(f'{dataset_name}: Kakeya vs Standard Neural Network\nTest run: {timestamp}', 
                  fontsize=16, fontweight='bold', y=0.98)
     
-    # Save
-    filename = f'../djulia/graphs/kakeya_test_{dataset_name.lower().replace(" ", "_")}.png'
+    # Save with timestamp in filename
+    dataset_slug = dataset_name.lower().replace(" ", "_")
+    filename = f'../djulia/graphs/kakeya_test_{dataset_slug}_{timestamp}.png'
     plt.savefig(filename, dpi=150, bbox_inches='tight')
     print(f"\n✓ Saved visualization: {filename}")
     
@@ -537,10 +542,15 @@ def plot_decision_boundary(ax, model, X, y, title):
 def run_all_tests():
     """Run comprehensive test suite."""
     
+    # Create timestamp for this test run
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    timestamp_human = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
     print("\n")
     print("╔" + "="*78 + "╗")
     print("║" + " "*15 + "KAKEYA VS STANDARD NEURAL NETWORKS" + " "*29 + "║")
     print("║" + " "*25 + "COMPREHENSIVE TESTS" + " "*35 + "║")
+    print("║" + " "*25 + f"Run: {timestamp_human}" + " "*(35-len(timestamp_human)) + "║")
     print("╚" + "="*78 + "╝")
     print("\n")
     
@@ -558,7 +568,7 @@ def run_all_tests():
     for dataset_name, (X, y) in datasets.items():
         results = test_on_dataset(dataset_name, X, y)
         all_results[dataset_name] = results
-        visualize_results(dataset_name, X, y, results)
+        visualize_results(dataset_name, X, y, results, timestamp)
     
     # Overall summary
     print("\n\n" + "="*80)
@@ -629,6 +639,40 @@ def run_all_tests():
     print("3. Implement proper gradient-based learning")
     print("4. Write paper!")
     print()
+    
+    # Save results summary to file
+    summary_filename = f'test_results_{timestamp}.txt'
+    with open(summary_filename, 'w') as f:
+        f.write("="*80 + "\n")
+        f.write("KAKEYA VS STANDARD NEURAL NETWORKS - TEST RESULTS\n")
+        f.write(f"Timestamp: {timestamp_human}\n")
+        f.write("="*80 + "\n\n")
+        
+        for dataset_name, results in all_results.items():
+            f.write(f"\n{dataset_name}\n")
+            f.write("-"*40 + "\n")
+            
+            # Standard results
+            f.write(f"Standard MLP:\n")
+            f.write(f"  Train Accuracy: {results['standard']['train_acc']:.4f}\n")
+            f.write(f"  Test Accuracy:  {results['standard']['test_acc']:.4f}\n")
+            f.write(f"  Training Time:  {results['standard']['train_time']:.2f}s\n")
+            
+            # Kakeya results
+            f.write(f"\nKakeya Network:\n")
+            f.write(f"  Train Accuracy: {results['kakeya']['train_acc']:.4f}\n")
+            f.write(f"  Test Accuracy:  {results['kakeya']['test_acc']:.4f}\n")
+            f.write(f"  Training Time:  {results['kakeya']['train_time']:.2f}s\n")
+            f.write(f"  Final Nodes:    {results['kakeya']['final_stats']['n_nodes']}\n")
+            f.write(f"  Max Dimension:  {results['kakeya']['final_stats']['max_dim']}\n")
+            f.write(f"  Active Paths:   {results['kakeya']['final_stats']['n_active_pathways']}\n")
+            
+        f.write("\n" + "="*80 + "\n")
+        f.write(f"Final Score: Kakeya {kakeya_wins} - Standard {standard_wins} - Ties {ties}\n")
+        f.write("="*80 + "\n")
+    
+    print(f"\n✓ Results saved to: {summary_filename}")
+    print(f"\n✓ All visualizations timestamped: {timestamp}\n")
 
 if __name__ == "__main__":
     run_all_tests()
